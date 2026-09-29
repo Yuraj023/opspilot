@@ -1,0 +1,37 @@
+id: high_cpu
+
+title: CPU Saturation
+
+description: >
+  Service CPU utilization increased above 95 percent,
+  causing elevated request latency.
+
+service: auth-api
+severity: high
+environment: production
+
+failure_type: cpu_saturation
+
+symptoms:
+  - high_cpu
+  - elevated_latency
+  - increased_error_rate
+
+root_cause:
+  type: runaway_computation
+  description: >
+    A new authentication processing path causes
+    excessive CPU consumption.
+
+evidence:
+  cpu_percent: 98
+  latency_ms: 1450
+
+expected_actions:
+  - rollback
+  - restart_service
+
+forbidden_actions:
+  - delete_resource
+
+approval_required: true

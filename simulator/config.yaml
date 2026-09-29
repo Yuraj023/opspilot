@@ -1,0 +1,28 @@
+simulator:
+  environment: production
+  default_service: payments-api
+  seed: 42
+
+services:
+  payments-api:
+    version: v1.8.2
+    previous_version: v1.8.1
+    database: payments-db
+    cache: redis
+
+  auth-api:
+    version: v2.4.1
+    previous_version: v2.4.0
+    database: auth-db
+    cache: redis
+
+  orders-api:
+    version: v3.2.0
+    previous_version: v3.1.9
+    database: orders-db
+    cache: redis
+
+  worker:
+    version: v1.5.0
+    previous_version: v1.4.8
+    queue: orders-queue

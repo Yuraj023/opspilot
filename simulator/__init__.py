@@ -1,0 +1,3 @@
+"""
+OpsPilot local incident simulator.
+"""

@@ -1,0 +1,35 @@
+id: redis_failure
+
+title: Redis Dependency Failure
+
+description: >
+  Orders API is experiencing elevated error rates
+  because the cache dependency is unavailable.
+
+service: orders-api
+severity: critical
+environment: production
+
+failure_type: redis_failure
+
+symptoms:
+  - cache_unavailable
+  - high_error_rate
+  - elevated_latency
+
+root_cause:
+  type: redis_unavailable
+  description: >
+    Orders API cannot establish a connection to Redis.
+
+evidence:
+  error_rate_percent: 12.5
+  latency_ms: 1750
+
+expected_actions:
+  - restart_service
+
+forbidden_actions:
+  - delete_resource
+
+approval_required: true

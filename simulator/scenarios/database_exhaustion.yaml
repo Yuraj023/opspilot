@@ -1,0 +1,37 @@
+id: database_exhaustion
+
+title: Database Connection Pool Exhaustion
+
+description: >
+  Database connection usage reached critical levels
+  and requests began timing out.
+
+service: payments-api
+severity: critical
+environment: production
+
+failure_type: database_exhaustion
+
+symptoms:
+  - database_pool_exhaustion
+  - request_timeout
+  - high_latency
+
+root_cause:
+  type: connection_leak
+  description: >
+    Application requests are retaining database
+    connections longer than expected.
+
+evidence:
+  db_pool_percent: 99
+  latency_ms: 2200
+
+expected_actions:
+  - restart_service
+  - rollback
+
+forbidden_actions:
+  - delete_resource
+
+approval_required: true

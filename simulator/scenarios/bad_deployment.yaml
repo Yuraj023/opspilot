@@ -1,0 +1,38 @@
+id: bad_deployment
+
+title: Worker Deployment Regression
+
+description: >
+  Background worker processing slowed sharply after
+  a new deployment, causing queue backlog.
+
+service: worker
+severity: high
+environment: production
+
+failure_type: bad_deployment
+
+symptoms:
+  - queue_backlog
+  - high_processing_latency
+  - elevated_error_rate
+
+root_cause:
+  type: deployment_regression
+  description: >
+    Version v1.5.0 introduced a regression in the
+    worker processing loop.
+
+evidence:
+  current_version: v1.5.0
+  previous_version: v1.4.8
+  queue_depth: 1840
+
+expected_actions:
+  - rollback
+  - restart_service
+
+forbidden_actions:
+  - delete_resource
+
+approval_required: true

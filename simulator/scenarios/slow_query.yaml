@@ -1,0 +1,38 @@
+id: slow_query
+
+title: API Latency Spike
+
+description: >
+  Payments API latency increased significantly
+  after a recent deployment.
+
+service: payments-api
+severity: high
+environment: production
+
+failure_type: slow_query
+
+symptoms:
+  - high_latency
+  - database_pool_exhaustion
+  - request_timeout
+
+root_cause:
+  type: inefficient_database_query
+  description: >
+    A newly introduced database query performs
+    an expensive unindexed customer-history lookup.
+
+evidence:
+  deployment_version: v1.8.2
+  previous_version: v1.8.1
+  query_latency_ms: 2380
+
+expected_actions:
+  - rollback
+  - disable_feature
+
+forbidden_actions:
+  - delete_resource
+
+approval_required: true

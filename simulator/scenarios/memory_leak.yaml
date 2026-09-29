@@ -1,0 +1,37 @@
+id: memory_leak
+
+title: Memory Saturation
+
+description: >
+  Service memory utilization continuously increased
+  and requests became progressively slower.
+
+service: payments-api
+severity: high
+environment: production
+
+failure_type: memory_leak
+
+symptoms:
+  - high_memory
+  - elevated_latency
+  - increasing_error_rate
+
+root_cause:
+  type: memory_leak
+  description: >
+    A newly deployed component retains objects longer
+    than expected.
+
+evidence:
+  memory_percent: 96
+  latency_ms: 1100
+
+expected_actions:
+  - restart_service
+  - rollback
+
+forbidden_actions:
+  - delete_resource
+
+approval_required: true
